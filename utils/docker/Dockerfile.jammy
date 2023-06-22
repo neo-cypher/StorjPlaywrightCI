@@ -41,7 +41,7 @@ RUN mkdir /ms-playwright && \
     rm -rf /ms-playwright-agent && \
     chmod -R 777 /ms-playwright
 
-FROM  golang:1.20.1 AS builder
+FROM  golang:1.20.1 AS SJ-Build
 
 WORKDIR /go/ci
 
@@ -50,3 +50,6 @@ RUN bash deps.sh
 
 COPY ./slim.sh slim.sh
 RUN bash slim.sh
+
+COPY ./git-uitests.sh git-uitests.sh
+RUN bash git-uitests.sh
