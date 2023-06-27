@@ -22,11 +22,8 @@ allure*
 playwright-report
 test-results
 /demo/
-/packages/*/LICENSE
-/packages/*/NOTICE
-/packages/playwright/README.md
-/packages/playwright-core/api.json
 .env
+packages/*
 /tests/installation/output/
 /tests/installation/.registry.json
 .cache/
