@@ -6,6 +6,8 @@ ARG DOCKER_IMAGE_NAME_TEMPLATE="storj-qa/playwright:v1.35.1-jammy"
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
+
+
 FROM  golang:1.20.1 AS SJ-Build
 
 WORKDIR /go/ci
