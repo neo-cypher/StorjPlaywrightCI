@@ -10,6 +10,3 @@ cd storj/testsuite/playwright-ui/
 npm install --prefer-offline --no-audit --logleve verbose
 echo "module stub" > ./node_modules/go.mod # prevent Go from scanning this dir
 # npx playwright install
-
-npm install playwright-slack-report -D
-npm install @slack/web-api @slack/socket-mode
