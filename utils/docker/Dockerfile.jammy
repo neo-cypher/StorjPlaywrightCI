@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/playwright:v1.35.1-jammy as playwright
+FROM  mcr.microsoft.com/playwright:v1.36.0-alpha-jun-27-2023 As playwright
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TZ=America/New_York
-ARG DOCKER_IMAGE_NAME_TEMPLATE="storj-qa/playwright:v1.35.1-jammy"
+ARG DOCKER_IMAGE_NAME_TEMPLATE="storj-qa/playwright:v1.36.0-jammy"
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
