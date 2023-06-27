@@ -2,11 +2,21 @@ FROM  mcr.microsoft.com/playwright:v1.36.0-alpha-jun-27-2023 As playwright
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TZ=America/New_York
-ARG DOCKER_IMAGE_NAME_TEMPLATE="storj-qa/playwright:v1.36.0-jammy"
+ARG DOCKER_IMAGE_NAME_TEMPLATE="storj-qa/playwright:v1.36.0-alpha-jun-27-2023"
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
+COPY ./playwright-core.tar.gz /tmp/playwright-core.tar.gz
 
+RUN mkdir /ms-playwright && \
+    mkdir /ms-playwright-agent && \
+    cd /ms-playwright-agent && npm init -y && \
+    npm i /tmp/playwright-core.tar.gz && \
+    npm exec --no -- playwright-core mark-docker-image "${DOCKER_IMAGE_NAME_TEMPLATE}" && \
+    npm exec --no -- playwright-core install --with-deps && rm -rf /var/lib/apt/lists/* && \
+    rm /tmp/playwright-core.tar.gz && \
+    rm -rf /ms-playwright-agent && \
+    chmod -R 777 /ms-playwright
 
 FROM  golang:1.20.1 AS SJ-Build
 
@@ -17,6 +27,3 @@ RUN bash deps.sh
 
 COPY ./slim.sh slim.sh
 RUN bash slim.sh
-
-COPY ./git-uitests.sh git-uitests.sh
-RUN bash git-uitests.sh
